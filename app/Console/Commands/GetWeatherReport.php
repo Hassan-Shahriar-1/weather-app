@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Services\WeatherService;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 
 class GetWeatherReport extends Command
 {
@@ -28,7 +29,7 @@ class GetWeatherReport extends Command
      */
     public function handle()
     {
-
+        Log::info('commands working fine');
         WeatherService::createLogOfWeather();
         return Command::SUCCESS;
     }

@@ -8,13 +8,13 @@ use GuzzleHttp\Psr7\Request;
 
 class WeatherService
 {
-    private const cordinates = [
-        'Abu Dhabi' => ['log' => '54.366669', 'lat' => '24.466667'],
-        'Dubai' => ['log' => '55.27022981008994', 'lat' => '25.205049246698042'],
-        'Sharjah,' => ['log' => '55.405403', 'lat' => '25.348766'],
-        'London' => ['log' => '-0.118092', 'lat' => '51.509865'],
-        'New York' => ['log' => '-74.01814437781896', 'lat' => '40.70986392881991'],
-        'Tokyo' => ['log' => '139.79983261050972', 'lat' => '35.71956934565265']
+    private const CITIES = [
+        'Abu Dhabi',
+        'Dubai',
+        'Sharjah',
+        'London',
+        'New York',
+        'Tokyo'
     ];
 
     /**
@@ -23,9 +23,9 @@ class WeatherService
      */
     public static function createLogOfWeather(): void
     {
-        $cordinates = self::cordinates;
+        $cordinates = self::CITIES;
 
-        foreach ($cordinates as $city => $cordinate) {
+        foreach ($cordinates as $city) {
             $weatherInfo = self::weatherApiCall($city);
             self::storingWeatherInformation($weatherInfo);
         }
@@ -33,8 +33,7 @@ class WeatherService
 
     /**
      * api call http 
-     * @param string $lat
-     * @param string $lon
+     * @param string $cityName
      * @return array
      */
     private static function weatherApiCall(string $cityName): array
@@ -57,6 +56,7 @@ class WeatherService
     {
 
         $weatherData = [];
+
         //assigning values for storing weather info
         $weatherData['city'] = $weatherInfo['name'];
         $weatherData['lon'] = $weatherInfo['coord']['lon'];
