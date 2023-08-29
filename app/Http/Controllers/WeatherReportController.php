@@ -10,6 +10,6 @@ class WeatherReportController extends Controller
 {
     public function dashboardData()
     {
-        return WeatherService::createLogOfWeather();
+        return view('dashboard');
     }
 }
