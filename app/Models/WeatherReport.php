@@ -27,4 +27,44 @@ class WeatherReport extends Model
         'updated_at',
         'deleted_at'
     ];
+
+    /**
+     * scope for last 24 hours data get
+     * 
+     */
+    public function scopeLast24Hours($query)
+    {
+        $start = now()->subHours(24); // Current time - 24 hours
+        $end = now(); // Current time
+
+        return $query->whereBetween('created_at', [$start, $end]);
+    }
+
+    /**
+     * getting data
+     * @return array
+     */
+    public static function getReport(): array
+    {
+        $data = self::select('temparature', 'wind_speed', 'humidity')->last24Hours()->get();
+        $report = [];
+        $report['latest'] = self::latestData();
+        $report['dataset']['temprature'] = $data->pluck('temparature');
+        $report['dataset']['wind'] = $data->pluck('wind_speed');
+        $report['dataset']['humidity'] = $data->pluck('humidity');
+
+        return $report;
+    }
+
+    /**
+     * getting latest data of weather
+     * @return object
+     */
+    protected static function latestData(): object
+    {
+        return self::select('country', 'city', 'temparature')
+            ->orderBy('created_at', 'desc')
+            ->take(5)
+            ->get();
+    }
 }

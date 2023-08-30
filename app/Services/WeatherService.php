@@ -40,7 +40,7 @@ class WeatherService
     {
 
         $client = new Client();
-        $request = new Request('GET', 'https://api.openweathermap.org/data/2.5/weather?q=' . $cityName . '&appid=' . config('weather.api_key'));
+        $request = new Request('GET', 'https://api.openweathermap.org/data/2.5/weather?q=' . $cityName . '&units=metric&appid=' . config('weather.api_key'));
         $res = $client->send($request);
 
         return json_decode($res->getBody(), true);

@@ -1,8 +1,16 @@
 <template>
     <div>
-        <h1>Line Chart</h1>
+        <div class="row">
+                <div class="col-6">
+                    <p class="text-left">Wind (Last24 hours)</p>
+                </div>
+                <div class="col-6">
+                        <p class="text-right">{{ currentDate }}</p>
+                    </div>
          
             <Line id="line-chart" :options="chartOptions" :data="chartData" />
+            </div>
+
     </div>
 </template>
 
@@ -37,6 +45,7 @@ export default {
    
     data() {
         return {
+            currentDate: new Date().toLocaleDateString(),
             chartData: {
                 labels: ['00', '02', '04', '06', '08', '10', '12', '14', '16', '18', '20', '22', '24'],
                 datasets: [{ 

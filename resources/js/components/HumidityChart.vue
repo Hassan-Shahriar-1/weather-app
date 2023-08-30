@@ -1,7 +1,14 @@
 <template>
     <div>
-        <h1>Bar Chart</h1>
+       <div class="row">
+                <div class="col-6">
+                    <p class="text-left">Wind (Last24 hours)</p>
+                </div>
+                <div class="col-6">
+                        <p class="text-right">{{ currentDate }}</p>
+                    </div>
         <Bar id="my-chart-id" :options="chartOptions" :data="chartData" />
+        </div>
     </div>
 </template>
 
@@ -17,6 +24,7 @@ export default {
 
     data() {
         return {
+            currentDate: new Date().toLocaleDateString(),
             chartData: {
                 labels: ['January', 'February', 'March'],
                 datasets: [{ data: [40, 20, 12] }]

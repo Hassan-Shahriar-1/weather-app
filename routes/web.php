@@ -19,3 +19,4 @@ Route::get('/', function () {
 });
 
 Route::get('dashboard', [WeatherReportController::class, 'dashboardData']);
+Route::get('weather-report', [WeatherReportController::class, 'getWeatherReportData'])->name('weather.report');

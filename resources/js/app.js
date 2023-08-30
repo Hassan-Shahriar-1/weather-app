@@ -16,12 +16,12 @@ import { createApp } from 'vue';
 const app = createApp({});
 
 import dashboardComponent from './components/DashboardPage.vue';
-import LineChartComponent from './components/LineChartComponent.vue';
+
 
 
 
 app.component('dashboard-page', dashboardComponent);
-app.component('line-chart-component',LineChartComponent);
+
 
 /**
  * The following block of code may be used to automatically register your

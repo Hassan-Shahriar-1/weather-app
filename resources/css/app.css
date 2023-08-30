@@ -1,0 +1,36 @@
+.bg-violet {
+    background-color: rgb(142, 2, 207) !important;
+}
+.custom-card {
+    width: 200px !important;
+    height: 250px !important;
+    background-color: violet !important;
+    border: none !important;
+    border-radius: 10px !important;
+    color: white !important;
+}
+
+.card-body {
+    padding: 1.5rem !important;
+}
+
+.card-title {
+    font-size: 1.25rem !important;
+    margin-bottom: 0.25rem !important;
+}
+
+.card-subtitle {
+    font-size: 0.875rem !important;
+    opacity: 0.7 !important;
+    margin-bottom: 1.5rem !important;
+}
+
+.weather-icon {
+    width: 60px !important;
+    height: 60px !important;
+}
+
+.temperature {
+    font-size: 2rem !important;
+    margin: 0 !important;
+}
