@@ -44,9 +44,13 @@ class WeatherReport extends Model
      * getting data
      * @return array
      */
-    public static function getReport(): array
+    public static function getReport(string $city): array
     {
-        $data = self::select('temparature', 'wind_speed', 'humidity')->last24Hours()->get();
+
+        $data = self::select('temparature', 'wind_speed', 'humidity')
+            ->where('city', $city)
+            ->last24Hours()
+            ->get();
         $report = [];
         $report['latest'] = self::latestData();
         $report['dataset']['temprature'] = $data->pluck('temparature');

@@ -19,12 +19,16 @@ class WeatherReportController extends Controller
      * get weather report data for chart
      * @return JsonResponse
      */
-    public function getWeatherReportData(): JsonResponse
+    public function getWeatherReportData(Request $request): JsonResponse
     {
         try {
-            $data = WeatherReport::getReport();
+            $city = $request->has('city') ? $request->city  : 'Abu Dhabi';
+
+            $data = WeatherReport::getReport($city);
+
+
             return response()->json([
-                'status_code' => 500,
+                'status_code' => 200,
                 'message' => null,
                 'data' => $data
             ]);
