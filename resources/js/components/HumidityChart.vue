@@ -20,7 +20,10 @@ ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 
 export default {
     props: {
-        humidityData: Array, // Define the prop name
+        humidityData: {
+            type:Array,
+            required:true
+        }, // Define the prop name
     },
     components: { Bar },
 

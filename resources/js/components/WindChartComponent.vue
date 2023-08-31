@@ -39,7 +39,10 @@ ChartJS.register(
 
 export default {
     props: {
-        windData: Array, // Define the prop name
+        windData: {
+            type:Array,
+            required:true
+        }, // Define the prop name
     },
     components: { Line },
 

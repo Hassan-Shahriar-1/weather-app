@@ -41,7 +41,10 @@ ChartJS.register(
 
 export default {
   props: {
-        temperatureData: Object, // Define the prop name
+        temperatureData: {
+            type :Array,
+            required:true
+        }, // Define the prop name
     },
      components: { Line },
      created(){

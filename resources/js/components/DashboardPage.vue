@@ -4,7 +4,7 @@
             <div class="col-7 mt-5">
                 <h3 class="text-center">Weather Report</h3>
                 <div class="row text-center">
-                    <div class="card custom-card col-3 m-4" v-for="(cityData, index) in chartData.latest" :key="index">
+                    <div class="card custom-card col-4 m-4" v-for="(cityData, index) in chartData.latest" :key="index">
                         
                             <div class="card-body d-flex flex-column justify-content-between">
                             <div>
@@ -24,13 +24,13 @@
                 </div>
         </div>
 
-        <div class="col-5">
+        <div class="col-5 mr-3" v-if="isDataLoaded">
             
-            <div class="col-12"><temparature-chart :temperature-data="this.chartData.dataset" ></temparature-chart></div>
+            <div class="col-12"><temparature-chart :temperatureData="chartData.dataset.temperature" ></temparature-chart></div>
             <br>
-            <div class="col-12"><wind-chart :wind-data="[12, 11, 20, 15, 18]" ></wind-chart></div>
+            <div class="col-12"><wind-chart :windData="chartData.dataset.wind" ></wind-chart></div>
             <br>
-            <div class="col-12"><humidity-chart :humidity-data="[12, 11, 20, 15, 18]" /></div>
+            <div class="col-12"><humidity-chart :humidityData="chartData.dataset.humidity" /></div>
         </div>
         </div>
     </div>
@@ -48,14 +48,22 @@ export default {
         TemparatureChart,
         WindChart
     },
-    created(){
+    mounted(){
         this.reportCallApi()
          console.log('after load', this.chartData)
     },
     
    data() {
         return {
-            chartData: [],
+             chartData: {  // Initialize the structure of chartData
+                dataset: {
+                    temperature: [],
+                    wind: [],
+                    humidity: []
+                },
+                latest: [],
+                isDataLoaded: false
+            },
             selectedCity : 'Abu Dhabi',
             iconUrl: "http://openweathermap.org/img/w/"
         };
@@ -67,12 +75,22 @@ export default {
                     
                     if(response.data.status_code == 200){   
                         
-
-                        this.chartData = response.data.data
+                        this.isDataLoaded = true
+                        this.chartData.latest = response.data.data.latest
+                        this.chartData.dataset.temperature = response.data.data.dataset.temparature
+                        this.chartData.dataset.wind = response.data.data.dataset.wind
+                        this.chartData.dataset.humidity = response.data.data.dataset.humidity
                        
                         
                     }else{
-                        this.chartData = null
+                         this.chartData = {
+                            dataset: {
+                                temperature: [],
+                                wind: [],
+                                humidity: []
+                            },
+                            latest: []
+                        };
                     }
                 })
                 .catch(error => {
