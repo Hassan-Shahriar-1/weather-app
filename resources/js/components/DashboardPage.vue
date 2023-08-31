@@ -25,12 +25,17 @@
         </div>
 
         <div class="col-5 mr-3" v-if="isDataLoaded">
+            <div class="col-12">
+                <select v-model="selectedCity" @change="changeCity">
+                    <option class="c-black" v-for="(name,index) in chartData.cities" :key="index" :value=" name " >{{ name }}</option>
+                </select>
+            </div>
             
-            <div class="col-12"><temparature-chart :temperatureData="chartData.dataset.temperature" ></temparature-chart></div>
+            <div class="col-12"><temparature-chart :temperatureData="chartData.dataset.temperature" :key="selectedCity" ></temparature-chart></div>
             <br>
-            <div class="col-12"><wind-chart :windData="chartData.dataset.wind" ></wind-chart></div>
+            <div class="col-12"><wind-chart :windData="chartData.dataset.wind" :key="selectedCity" ></wind-chart></div>
             <br>
-            <div class="col-12"><humidity-chart :humidityData="chartData.dataset.humidity" /></div>
+            <div class="col-12"><humidity-chart :humidityData="chartData.dataset.humidity" :key="selectedCity" /></div>
         </div>
         </div>
     </div>
@@ -48,9 +53,12 @@ export default {
         TemparatureChart,
         WindChart
     },
+    created(){
+        this.reportCallApi()
+    },
     mounted(){
         this.reportCallApi()
-         console.log('after load', this.chartData)
+        this.selectedCity
     },
     
    data() {
@@ -62,15 +70,17 @@ export default {
                     humidity: []
                 },
                 latest: [],
+                cities:[],
                 isDataLoaded: false
             },
-            selectedCity : 'Abu Dhabi',
+            selectedCity : '',
             iconUrl: "http://openweathermap.org/img/w/"
         };
     },
     methods:{
          reportCallApi() {
-            axios.get('weather-report?city='+this.selectedCity) // Replace with your actual API route
+            console.log(this.selectedCity)
+            axios.get('weather-report?city='+this.selectedCity) 
                 .then(response => {
                     
                     if(response.data.status_code == 200){   
@@ -80,7 +90,7 @@ export default {
                         this.chartData.dataset.temperature = response.data.data.dataset.temparature
                         this.chartData.dataset.wind = response.data.data.dataset.wind
                         this.chartData.dataset.humidity = response.data.data.dataset.humidity
-                       
+                        this.chartData.cities = response.data.data.cities
                         
                     }else{
                          this.chartData = {
@@ -97,8 +107,9 @@ export default {
                     console.error('Error fetching data:', error);
                 });
          },
-         changeCity(cityName){
-            this.selectedCity = cityName
+         changeCity(){
+
+            this.reportCallApi()
          }
     }
 };

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Services\WeatherService;
 use App\Traits\UsesUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -54,6 +55,7 @@ class WeatherReport extends Model
             ->get();
         $report = [];
         $report['latest'] = self::latestData();
+        $report['cities'] = WeatherService::CITIES;
         $report['dataset']['temparature'] = $data->pluck('temparature');
         $report['dataset']['wind'] = $data->pluck('wind_speed');
         $report['dataset']['humidity'] = $data->pluck('humidity');

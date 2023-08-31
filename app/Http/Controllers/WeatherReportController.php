@@ -22,7 +22,7 @@ class WeatherReportController extends Controller
     public function getWeatherReportData(Request $request): JsonResponse
     {
         try {
-            $city = $request->has('city') ? $request->city  : 'Abu Dhabi';
+            $city = $request->has('city') ? ($request->city ?? 'Abu Dhabi') : 'Abu Dhabi';
 
             $data = WeatherReport::getReport($city);
 

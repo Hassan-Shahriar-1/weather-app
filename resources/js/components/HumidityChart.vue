@@ -2,7 +2,7 @@
     <div>
        <div class="row">
                 <div class="col-6">
-                    <p class="text-left">Wind (Last24 hours)</p>
+                    <p class="text-left">Humidity (Last24 hours)</p>
                 </div>
                 <div class="col-6">
                         <p class="text-right">{{ currentDate }}</p>
@@ -31,8 +31,13 @@ export default {
         return {
             currentDate: new Date().toLocaleDateString(),
             chartData: {
-                labels: ['January', 'February', 'March'],
-                datasets: [{ data: [40, 20, 12] }]
+                labels: ['00', '02', '04', '06', '08', '10', '12', '14', '16','18', '20','22','24'],
+                datasets: [{
+                    label: 'Humidity last 24 hours',
+                    data: this.humidityData ,
+                    borderColor: 'rgb(72, 232, 200)',
+                    tension: 0.1
+                }]
             },
             chartOptions: {
                 responsive: true

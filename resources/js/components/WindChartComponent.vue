@@ -42,7 +42,7 @@ export default {
         windData: {
             type:Array,
             required:true
-        }, // Define the prop name
+        },
     },
     components: { Line },
 
@@ -53,7 +53,7 @@ export default {
                 labels: ['00', '02', '04', '06', '08', '10', '12', '14', '16', '18', '20', '22', '24'],
                 datasets: [{
                     label: 'Temparature last 24 hours',
-                    data: [10, 20, 3, 4, 25, 11, 19],
+                    data: this.windData,
                     fill: false,
                     borderColor: 'red', // Color of the line
                     backgroundColor: 'rgba(255, 255, 255, 0.8)', // Area under the line

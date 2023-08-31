@@ -8,7 +8,7 @@ use GuzzleHttp\Psr7\Request;
 
 class WeatherService
 {
-    private const CITIES = [
+    public const CITIES = [
         'Abu Dhabi',
         'Dubai',
         'Sharjah',

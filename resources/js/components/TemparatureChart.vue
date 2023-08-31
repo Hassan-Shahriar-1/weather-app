@@ -2,7 +2,7 @@
     <div>
         <div class="row">
                 <div class="col-6">
-                    <p class="text-left">Wind (Last24 hours)</p>
+                    <p class="text-left">Temperature (Last24 hours)</p>
                 </div>
                 <div class="col-6">
                         <p class="text-right">{{ currentDate }}</p>
@@ -44,12 +44,10 @@ export default {
         temperatureData: {
             type :Array,
             required:true
-        }, // Define the prop name
+        },
     },
      components: { Line },
-     created(){
-        console.log('test',this.temperatureData)
-     },
+    
    
     data() {
         return {
@@ -68,6 +66,22 @@ export default {
                  responsive: true
                
             }
+        }
+    },
+    methods: {
+            updateChart() {
+                this.chartData.datasets[0].data = this.temperatureData;
+                //this.renderChart(this.chartData, this.chartOptions);
+            }
+    },
+    watch: {
+        temperatureData: {
+            handler(newValue, oldValue) {
+                if (newValue !== oldValue) {
+                    this.updateChart();
+                }
+            },
+            immediate: true
         }
     }
     
