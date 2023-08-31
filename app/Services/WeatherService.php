@@ -67,6 +67,7 @@ class WeatherService
         $weatherData['wind_speed'] = $weatherInfo['wind']['speed'];
         $weatherData['weather_status'] = $weatherInfo['weather'][0]['main'];
         $weatherData['country'] = $weatherInfo['sys']['country'];
+        $weatherData['icon'] = $weatherInfo['weather'][0]['icon'];
 
         return WeatherReport::create($weatherData);
     }

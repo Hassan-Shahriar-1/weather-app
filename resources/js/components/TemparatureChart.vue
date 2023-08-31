@@ -40,8 +40,13 @@ ChartJS.register(
 
 
 export default {
-  
+  props: {
+        temperatureData: Object, // Define the prop name
+    },
      components: { Line },
+     created(){
+        console.log('test',this.temperatureData)
+     },
    
     data() {
         return {
@@ -50,7 +55,7 @@ export default {
                 labels: ['00', '02', '04', '06', '08', '10', '12', '14', '16', '18', '20', '22', '24'],
                 datasets: [{ 
                     label: 'Temparature last 24 hours',
-                    data: [10, 20, 3, 4, 25,11,19],
+                    data: this.temperatureData,
                     fill: false,
                     borderColor: 'rgb(75, 192, 192)',
                     tension: 0.1

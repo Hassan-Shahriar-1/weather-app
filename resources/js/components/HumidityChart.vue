@@ -7,7 +7,7 @@
                 <div class="col-6">
                         <p class="text-right">{{ currentDate }}</p>
                     </div>
-        <Bar id="my-chart-id" :options="chartOptions" :data="chartData" />
+        <Bar id="humidity-chart" :options="chartOptions" :data="chartData" />
         </div>
     </div>
 </template>
@@ -19,7 +19,9 @@ ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 
 
 export default {
-    props: ['data', 'options'],
+    props: {
+        humidityData: Array, // Define the prop name
+    },
     components: { Bar },
 
     data() {

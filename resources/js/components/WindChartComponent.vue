@@ -38,7 +38,9 @@ ChartJS.register(
 
 
 export default {
-
+    props: {
+        windData: Array, // Define the prop name
+    },
     components: { Line },
 
     data() {

@@ -20,6 +20,7 @@ class WeatherReport extends Model
         'temparature',
         'feels_like',
         'humidity',
+        'icon',
         'wind_speed',
         'weather_status',
         'country',
@@ -53,7 +54,7 @@ class WeatherReport extends Model
             ->get();
         $report = [];
         $report['latest'] = self::latestData();
-        $report['dataset']['temprature'] = $data->pluck('temparature');
+        $report['dataset']['temparature'] = $data->pluck('temparature');
         $report['dataset']['wind'] = $data->pluck('wind_speed');
         $report['dataset']['humidity'] = $data->pluck('humidity');
 
@@ -66,7 +67,7 @@ class WeatherReport extends Model
      */
     protected static function latestData(): object
     {
-        return self::select('country', 'city', 'temparature')
+        return self::select('country', 'city', 'temparature', 'icon')
             ->orderBy('created_at', 'desc')
             ->take(5)
             ->get();
